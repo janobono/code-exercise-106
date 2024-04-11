@@ -16,7 +16,8 @@ mvn clean install
 ## run
 
 ```bash
-java -jar ./target/code-exercise-106.jar [arg1]
+java -jar ./target/code-exercise-106.jar [arg1] [arg2]
 ```
 
 - **arg1** represents path to input data file
+- **arg2** represents skip header value. Default value is true. It's optional.

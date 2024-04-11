@@ -1,20 +1,24 @@
 package sk.janobono;
 
-import sk.janobono.exercise.CodeExercise;
-import sk.janobono.exercise.CodeExerciseException;
-import sk.janobono.exercise.CodeExerciseProperties;
+import sk.janobono.exercise.ExerciseTask;
 
 public class Application {
 
     public static void main(final String[] args) {
         try {
-            final CodeExerciseProperties codeExerciseProperties = CodeExerciseProperties.parseApplicationProperties(args);
-            new CodeExercise(codeExerciseProperties).execute();
+            final ApplicationArgumentsParser applicationArgumentsParser = new ApplicationArgumentsParser(args);
+            new ExerciseTask().execute(
+                    applicationArgumentsParser.getInputDataPath(),
+                    applicationArgumentsParser.getSkipHeader()
+            );
             System.exit(0);
-        } catch (final CodeExerciseException applicationException) {
+        } catch (final ApplicationException applicationException) {
             System.err.println(applicationException.getMessage());
+            if (applicationException.getCause() != null) {
+                System.err.printf("%s%n", applicationException.getCause());
+            }
             System.exit(1);
-        } catch (final Throwable e) {
+        } catch (final Exception e) {
             System.err.printf("Something went wrong. %s%n", e);
             System.exit(1);
         }
