@@ -4,11 +4,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 
-public class ApplicationArgumentsParser {
+public class ApplicationArguments {
 
     private final String[] args;
 
-    public ApplicationArgumentsParser(final String[] args) {
+    public ApplicationArguments(final String[] args) {
         this.args = Optional.ofNullable(args).orElse(new String[0]);
     }
 

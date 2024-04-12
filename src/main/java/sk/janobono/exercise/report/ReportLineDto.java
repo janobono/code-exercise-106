@@ -1,6 +1,6 @@
-package sk.janobono.exercise;
+package sk.janobono.exercise.report;
 
-public record ReportDto(
+public record ReportLineDto(
         String firstName,
         String lastName,
         int diff

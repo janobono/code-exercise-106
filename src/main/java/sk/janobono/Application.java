@@ -6,7 +6,7 @@ public class Application {
 
     public static void main(final String[] args) {
         try {
-            final ApplicationArgumentsParser applicationArgumentsParser = new ApplicationArgumentsParser(args);
+            final ApplicationArguments applicationArgumentsParser = new ApplicationArguments(args);
             new ExerciseTask().execute(
                     applicationArgumentsParser.getInputDataPath(),
                     applicationArgumentsParser.getSkipHeader()

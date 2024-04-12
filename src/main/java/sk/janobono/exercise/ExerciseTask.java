@@ -1,39 +1,88 @@
 package sk.janobono.exercise;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import sk.janobono.ApplicationException;
+import sk.janobono.exercise.csv.CsvLineDto;
+import sk.janobono.exercise.csv.CsvLineReader;
+import sk.janobono.exercise.report.ReportLineDto;
+import sk.janobono.exercise.report.ReportLineReader;
+import sk.janobono.exercise.report.ReportRepository;
+
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Optional;
 
 public class ExerciseTask {
 
     public void execute(final Path inputDataPath, final boolean skipHeader) {
-        final LineParser csvService = new LineParser();
-        final ReportService reportService = new ReportService();
+        try (
+                final CsvLineReader lineReader = new CsvLineReader(inputDataPath, skipHeader);
+                final ReportRepository reportRepository = new ReportRepository(Files.createTempDirectory("Exercise106"), true);
+        ) {
+            Optional<CsvLineDto> line;
 
-        try (final BufferedReader bufferedReader = new BufferedReader(new FileReader(inputDataPath.toFile()))) {
-            String line;
-            int lineNumber = 0;
-
-            if (skipHeader) {
-                line = bufferedReader.readLine();
-                if (line == null) {
-                    return;
-                }
-                lineNumber++;
+            while ((line = lineReader.readLine()).isPresent()) {
+                reportRepository.addEmployee(line.get());
             }
 
-            while ((line = bufferedReader.readLine()) != null) {
-                lineNumber++;
-                final LineDto lineData = csvService.parseLine(line, lineNumber);
-                reportService.addEmployee(lineData);
-            }
-        } catch (final IOException e) {
+            printEarnLessReport(reportRepository);
+            printEarnMoreReport(reportRepository);
+            printTooLongLineReport(reportRepository);
+
+        } catch (final ApplicationException applicationException) {
+            throw applicationException;
+        } catch (final Exception e) {
             throw new RuntimeException(e);
         }
+    }
 
-        reportService.printEarnLessReport();
-        reportService.printEarnMoreReport();
-        reportService.printTooLongLineReport();
+    private void printEarnLessReport(final ReportRepository reportRepository) {
+        try (final ReportLineReader reportReader = reportRepository.getEarnLessReader()) {
+            Optional<ReportLineDto> report;
+            while ((report = reportReader.readLine()).isPresent()) {
+                final ReportLineDto reportDto = report.get();
+                System.out.printf(
+                        "Manager %s %s earns less than he should by [%d].%n",
+                        reportDto.firstName(),
+                        reportDto.lastName(),
+                        reportDto.diff()
+                );
+            }
+        } catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void printEarnMoreReport(final ReportRepository reportRepository) {
+        try (final ReportLineReader reportReader = reportRepository.getEarnMoreReader()) {
+            Optional<ReportLineDto> report;
+            while ((report = reportReader.readLine()).isPresent()) {
+                final ReportLineDto reportDto = report.get();
+                System.out.printf(
+                        "Manager %s %s earns more than he should by [%d].%n",
+                        reportDto.firstName(),
+                        reportDto.lastName(),
+                        reportDto.diff()
+                );
+            }
+        } catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void printTooLongLineReport(final ReportRepository reportRepository) {
+        try (final ReportLineReader reportReader = reportRepository.getTooLongLineReader()) {
+            Optional<ReportLineDto> report;
+            while ((report = reportReader.readLine()).isPresent()) {
+                final ReportLineDto reportDto = report.get();
+                System.out.printf(
+                        "Employee %s %s line is too long exceeds [%d].%n",
+                        reportDto.firstName(),
+                        reportDto.lastName(),
+                        reportDto.diff()
+                );
+            }
+        } catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

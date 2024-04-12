@@ -1,8 +1,8 @@
-package sk.janobono.exercise;
+package sk.janobono.exercise.csv;
 
 import java.io.Serializable;
 
-public record LineDto(
+public record CsvLineDto(
         int lineNumber,
         int id,
         String firstName,

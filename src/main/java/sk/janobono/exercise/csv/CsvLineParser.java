@@ -1,12 +1,12 @@
-package sk.janobono.exercise;
+package sk.janobono.exercise.csv;
 
 import sk.janobono.ApplicationException;
 
 import java.util.Optional;
 
-public class LineParser {
+public class CsvLineParser {
 
-    public LineDto parseLine(final String line, final int lineNumber) {
+    public CsvLineDto parseLine(final String line, final int lineNumber) {
         final String[] elements = Optional.ofNullable(line)
                 .orElse("")
                 .strip()
@@ -17,7 +17,7 @@ public class LineParser {
                 throw new IllegalArgumentException();
             }
 
-            return new LineDto(
+            return new CsvLineDto(
                     lineNumber,
                     Integer.parseInt(elements[0]),
                     elements[1].strip(),
