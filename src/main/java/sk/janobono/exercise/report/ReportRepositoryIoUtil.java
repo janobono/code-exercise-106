@@ -1,8 +1,6 @@
 package sk.janobono.exercise.report;
 
 import java.io.*;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.nio.file.Path;
 
 public class ReportRepositoryIoUtil {

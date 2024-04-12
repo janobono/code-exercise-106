@@ -14,7 +14,12 @@ public class CsvLineParser {
 
         try {
             if (elements.length < 4) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("Elements length must be at least 4");
+            }
+
+            final int salary = Integer.parseInt(elements[3]);
+            if (salary <= 0) {
+                throw new IllegalArgumentException("Salary must be at least 1");
             }
 
             return new CsvLineDto(
@@ -22,7 +27,7 @@ public class CsvLineParser {
                     Integer.parseInt(elements[0]),
                     elements[1].strip(),
                     elements[2].strip(),
-                    Integer.parseInt(elements[3]),
+                    salary,
                     elements.length == 5 ? Integer.parseInt(elements[4]) : null
             );
         } catch (final Exception e) {
