@@ -91,7 +91,6 @@ class ReportLineReaderTest {
                         0,
                         0,
                         0,
-                        0,
                         false,
                         false
                 )

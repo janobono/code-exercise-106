@@ -37,6 +37,9 @@ java -jar ./target/code-exercise-106.jar [arg1] [arg2]
 - Structure
     - DTO files are in same package as services. I would say putting them into some sub-package would increase
       readability of structure
+- ReportDataDto
+    - has unused percentage field
+    - Integer was used for salary
 - No validation
     - in case of invalid data
     - no processing (skip) empty line from input CSV
@@ -50,8 +53,8 @@ java -jar ./target/code-exercise-106.jar [arg1] [arg2]
 
 ## comments after review
 
-- `Number of rows can be up to 1000.` - wrong decision here I was thinking that it could be more. Partial result data
-  are serialized so the next reading is just summary.
+- `Number of rows can be up to 1000.` - wrong decision here I was thinking that it could be more. It can read big data
+  file. In the process of reading results are counted. For report than just read is needed.
     - Flag removed - fixed.
 
 - I didn't wrap the system errors in application errors. I wanted to use `ApplicationException` just for user-relevant
@@ -62,12 +65,22 @@ java -jar ./target/code-exercise-106.jar [arg1] [arg2]
     - DTO - simple utility just two packages and three DTOs
         - Fixed
 
+- ReportDataDto
+    - has unused percentage field - removed - fixed
+    - Integer was used for salary - [There is nothing](ASSIGNMENT.md) about data format. Based on example I decided to
+      use integer.
+
 - No validation
     - 'CsvLineParserTest' - you can see validation tests here
     - [There is nothing](ASSIGNMENT.md) about what to do in invalid data case. I decided to interrupt execution in that
       case and write error in to std.
 
 - Util classes doesn't have private constructor to hide the implicit one.
-  - I am using `@Component` in SpringBoot I forgot to hide constructor - fixed. 
+    - I am using `@Component` in SpringBoot I forgot to hide constructor - fixed.
 
 - ReportLineReaderTest - redundant variable removed - fixed.
+
+- ReportRepositoryMathUtilTest - `use only Java SE (any version), and Junit (any version) for tests.` I wasn't sure if I
+  can use the next dependency.
+
+- Documentation issues - simple util self documented code.

@@ -40,7 +40,7 @@ public class ReportRepository implements AutoCloseable {
         }
 
         if (csvLineDto.managerId() == null) {
-            final ReportDataDto reportDataDto = new ReportDataDto(csvLineDto, 0, 0, 0, 0, 0, false, false);
+            final ReportDataDto reportDataDto = new ReportDataDto(csvLineDto, 0, 0, 0, 0, false, false);
             ReportRepositoryIoUtil.save(employeePath, reportDataDto);
             return;
         }
@@ -87,7 +87,7 @@ public class ReportRepository implements AutoCloseable {
     }
 
     private void saveEmployee(final Path employeePath, final CsvLineDto csvLineDto, final ReportDataDto manager) {
-        final ReportDataDto employee = new ReportDataDto(csvLineDto, 0, 0, 0, 0, manager.lineLength() + 1, false, false);
+        final ReportDataDto employee = new ReportDataDto(csvLineDto, 0, 0, 0, manager.lineLength() + 1, false, false);
         ReportRepositoryIoUtil.save(employeePath, employee);
 
         if (employee.lineLength() > MAX_LINE_LENGTH) {
@@ -125,7 +125,6 @@ public class ReportRepository implements AutoCloseable {
                 salarySum,
                 subordinatesCount,
                 averageSalary,
-                percentage,
                 originalManager.lineLength(),
                 earnLess,
                 earnMore

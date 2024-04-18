@@ -9,7 +9,6 @@ public record ReportDataDto(
         int salarySum,
         int subordinatesCount,
         double averageSalary,
-        double percentage,
         int lineLength,
         boolean earnLess,
         boolean earnMore
