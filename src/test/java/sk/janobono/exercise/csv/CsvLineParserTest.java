@@ -40,8 +40,8 @@ class CsvLineParserTest {
     @Test
     void parseLine_WrongNumberFormatLine_ThrowsApplicationException() {
         final ApplicationException applicationException = assertThrows(ApplicationException.class,
-                () -> csvLineParser.parseLine("1,test,invalid,10.2,2", 1));
-        assertEquals("Invalid employee at line [1]: 1,test,invalid,10.2,2", applicationException.getMessage());
+                () -> csvLineParser.parseLine("abcd,test,invalid,xyz,2", 1));
+        assertEquals("Invalid employee at line [1]: abcd,test,invalid,xyz,2", applicationException.getMessage());
     }
 
     @Test

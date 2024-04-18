@@ -7,6 +7,9 @@ import java.nio.file.Path;
 
 public class ReportRepositoryIoUtil {
 
+    private ReportRepositoryIoUtil() {
+    }
+
     public static void cleanDirectory(final File dir) {
         final File[] allContents = dir.listFiles();
         if (allContents != null) {

@@ -5,6 +5,9 @@ import java.math.RoundingMode;
 
 public class ReportRepositoryMathUtil {
 
+    private ReportRepositoryMathUtil() {
+    }
+
     public static int toInt(final double value) {
         return BigDecimal.valueOf(value).setScale(0, RoundingMode.HALF_UP).intValue();
     }

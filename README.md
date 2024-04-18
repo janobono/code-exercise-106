@@ -59,6 +59,13 @@ java -jar ./target/code-exercise-106.jar [arg1] [arg2]
     - Fixed.
 
 - Structure
-  - DTO - simple utility just two packages and three DTOs
-    - Fixed
+    - DTO - simple utility just two packages and three DTOs
+        - Fixed
 
+- No validation
+    - 'CsvLineParserTest' - you can see validation tests here
+    - [There is nothing](ASSIGNMENT.md) about what to do in invalid data case. I decided to interrupt execution in that
+      case and write error in to std.
+
+- Util classes doesn't have private constructor to hide the implicit one.
+  - I am using `@Component` in SpringBoot I forgot to hide constructor - fixed. 
