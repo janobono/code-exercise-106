@@ -35,7 +35,7 @@ class ReportLineReaderTest {
 
     @Test
     void reportLineReader_fileNotExists_ExceptionIsThrown() {
-        final ApplicationException applicationException = assertThrows(ApplicationException.class,
+        assertThrows(ApplicationException.class,
                 () -> new ReportLineReader(dir, "none.txt", reportDataDto -> null));
     }
 
@@ -69,7 +69,7 @@ class ReportLineReaderTest {
                         reportDataDto.lineDto().lineNumber()
                 )
         )) {
-            final RuntimeException runtimeException = assertThrows(RuntimeException.class, reportLineReader::readLine);
+            assertThrows(ApplicationException.class, reportLineReader::readLine);
         }
     }
 

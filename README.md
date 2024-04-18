@@ -69,3 +69,5 @@ java -jar ./target/code-exercise-106.jar [arg1] [arg2]
 
 - Util classes doesn't have private constructor to hide the implicit one.
   - I am using `@Component` in SpringBoot I forgot to hide constructor - fixed. 
+
+- ReportLineReaderTest - redundant variable removed - fixed.
