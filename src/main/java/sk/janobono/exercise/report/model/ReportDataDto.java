@@ -1,6 +1,6 @@
-package sk.janobono.exercise.report;
+package sk.janobono.exercise.report.model;
 
-import sk.janobono.exercise.csv.CsvLineDto;
+import sk.janobono.exercise.csv.model.CsvLineDto;
 
 import java.io.Serializable;
 

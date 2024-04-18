@@ -1,6 +1,8 @@
 package sk.janobono.exercise.report;
 
 import sk.janobono.ApplicationException;
+import sk.janobono.exercise.report.model.ReportDataDto;
+import sk.janobono.exercise.report.model.ReportLineDto;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

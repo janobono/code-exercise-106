@@ -54,6 +54,11 @@ java -jar ./target/code-exercise-106.jar [arg1] [arg2]
   are serialized so the next reading is just summary.
     - Flag removed - fixed.
 
-- I didn't wrap the system error in application errors. I wanted to use `ApplicationException` just for user-relevant
+- I didn't wrap the system errors in application errors. I wanted to use `ApplicationException` just for user-relevant
   cases.
     - Fixed.
+
+- Structure
+  - DTO - simple utility just two packages and three DTOs
+    - Fixed
+

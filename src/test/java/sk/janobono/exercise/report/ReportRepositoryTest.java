@@ -3,7 +3,8 @@ package sk.janobono.exercise.report;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import sk.janobono.exercise.csv.CsvLineDto;
+import sk.janobono.exercise.csv.model.CsvLineDto;
+import sk.janobono.exercise.report.model.ReportLineDto;
 
 import java.io.IOException;
 import java.nio.file.Files;

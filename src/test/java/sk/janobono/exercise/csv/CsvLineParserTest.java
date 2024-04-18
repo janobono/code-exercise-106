@@ -3,6 +3,7 @@ package sk.janobono.exercise.csv;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import sk.janobono.ApplicationException;
+import sk.janobono.exercise.csv.model.CsvLineDto;
 
 import static org.junit.jupiter.api.Assertions.*;
 

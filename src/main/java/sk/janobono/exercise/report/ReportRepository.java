@@ -1,7 +1,9 @@
 package sk.janobono.exercise.report;
 
 import sk.janobono.ApplicationException;
-import sk.janobono.exercise.csv.CsvLineDto;
+import sk.janobono.exercise.csv.model.CsvLineDto;
+import sk.janobono.exercise.report.model.ReportDataDto;
+import sk.janobono.exercise.report.model.ReportLineDto;
 
 import java.io.IOException;
 import java.nio.file.Files;

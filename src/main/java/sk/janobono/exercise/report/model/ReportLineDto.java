@@ -1,4 +1,4 @@
-package sk.janobono.exercise.report;
+package sk.janobono.exercise.report.model;
 
 public record ReportLineDto(
         String firstName,

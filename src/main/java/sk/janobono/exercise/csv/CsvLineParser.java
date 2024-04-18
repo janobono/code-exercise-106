@@ -1,6 +1,7 @@
 package sk.janobono.exercise.csv;
 
 import sk.janobono.ApplicationException;
+import sk.janobono.exercise.csv.model.CsvLineDto;
 
 import java.util.Optional;
 

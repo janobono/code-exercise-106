@@ -1,9 +1,9 @@
 package sk.janobono.exercise;
 
 import sk.janobono.ApplicationException;
-import sk.janobono.exercise.csv.CsvLineDto;
+import sk.janobono.exercise.csv.model.CsvLineDto;
 import sk.janobono.exercise.csv.CsvLineReader;
-import sk.janobono.exercise.report.ReportLineDto;
+import sk.janobono.exercise.report.model.ReportLineDto;
 import sk.janobono.exercise.report.ReportLineReader;
 import sk.janobono.exercise.report.ReportRepository;
 

@@ -1,4 +1,4 @@
-package sk.janobono.exercise.csv;
+package sk.janobono.exercise.csv.model;
 
 import java.io.Serializable;
 

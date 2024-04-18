@@ -1,6 +1,7 @@
 package sk.janobono.exercise.csv;
 
 import org.junit.jupiter.api.Test;
+import sk.janobono.exercise.csv.model.CsvLineDto;
 
 import java.nio.file.Paths;
 import java.util.Optional;
