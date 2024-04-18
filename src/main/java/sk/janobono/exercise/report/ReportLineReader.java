@@ -1,7 +1,8 @@
 package sk.janobono.exercise.report;
 
+import sk.janobono.ApplicationException;
+
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -13,10 +14,14 @@ public class ReportLineReader implements AutoCloseable {
     final BufferedReader bufferedReader;
     final ReportLineMapper reportLineMapper;
 
-    public ReportLineReader(final Path dir, final String fileName, final ReportLineMapper reportLineMapper) throws FileNotFoundException {
-        this.dir = dir;
-        bufferedReader = new BufferedReader(new FileReader(dir.resolve(fileName).toFile()));
-        this.reportLineMapper = reportLineMapper;
+    public ReportLineReader(final Path dir, final String fileName, final ReportLineMapper reportLineMapper) {
+        try {
+            this.dir = dir;
+            bufferedReader = new BufferedReader(new FileReader(dir.resolve(fileName).toFile()));
+            this.reportLineMapper = reportLineMapper;
+        } catch (final IOException e) {
+            throw new ApplicationException("Report data open error.", e);
+        }
     }
 
     public Optional<ReportLineDto> readLine() {
@@ -28,7 +33,7 @@ public class ReportLineReader implements AutoCloseable {
                 return Optional.of(reportLineMapper.toReportLineDto(reportDataDto));
             }
         } catch (final IOException e) {
-            throw new RuntimeException(e);
+            throw new ApplicationException("Report data read error.", e);
         }
         return Optional.empty();
     }

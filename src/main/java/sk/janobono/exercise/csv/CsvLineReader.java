@@ -1,5 +1,7 @@
 package sk.janobono.exercise.csv;
 
+import sk.janobono.ApplicationException;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,14 +15,18 @@ public class CsvLineReader implements AutoCloseable {
 
     private int lineNumber = 0;
 
-    public CsvLineReader(final Path inputDataPath, final boolean skipHeader) throws IOException {
-        bufferedReader = new BufferedReader(new FileReader(inputDataPath.toFile()));
-        if (skipHeader) {
-            bufferedReader.readLine();
-            lineNumber++;
-        }
+    public CsvLineReader(final Path inputDataPath, final boolean skipHeader) {
+        try {
+            bufferedReader = new BufferedReader(new FileReader(inputDataPath.toFile()));
+            if (skipHeader) {
+                bufferedReader.readLine();
+                lineNumber++;
+            }
 
-        csvLineParser = new CsvLineParser();
+            csvLineParser = new CsvLineParser();
+        } catch (final IOException e) {
+            throw new ApplicationException("CSV open file error.", e);
+        }
     }
 
     public Optional<CsvLineDto> readLine() {
@@ -32,7 +38,7 @@ public class CsvLineReader implements AutoCloseable {
                 return Optional.of(lineData);
             }
         } catch (final IOException e) {
-            throw new RuntimeException(e);
+            throw new ApplicationException("CSV read line error.", e);
         }
         return Optional.empty();
     }

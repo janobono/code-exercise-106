@@ -3,6 +3,7 @@ package sk.janobono.exercise.report;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import sk.janobono.ApplicationException;
 import sk.janobono.exercise.csv.CsvLineDto;
 
 import java.io.FileNotFoundException;
@@ -33,7 +34,7 @@ class ReportLineReaderTest {
 
     @Test
     void reportLineReader_fileNotExists_ExceptionIsThrown() {
-        final FileNotFoundException fileNotFoundException = assertThrows(FileNotFoundException.class,
+        final ApplicationException applicationException = assertThrows(ApplicationException.class,
                 () -> new ReportLineReader(dir, "none.txt", reportDataDto -> null));
     }
 

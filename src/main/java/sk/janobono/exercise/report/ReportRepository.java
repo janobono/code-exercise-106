@@ -3,7 +3,6 @@ package sk.janobono.exercise.report;
 import sk.janobono.ApplicationException;
 import sk.janobono.exercise.csv.CsvLineDto;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,12 +19,16 @@ public class ReportRepository implements AutoCloseable {
 
     private final Path repositoryDir;
 
-    public ReportRepository(final Path repositoryDir) throws IOException {
-        this.repositoryDir = repositoryDir;
-        ReportRepositoryIoUtil.cleanDirectory(repositoryDir.toFile());
-        Files.createFile(repositoryDir.resolve(EARN_LESS));
-        Files.createFile(repositoryDir.resolve(EARN_MORE));
-        Files.createFile(repositoryDir.resolve(LONG_LINE));
+    public ReportRepository(final Path repositoryDir) {
+        try {
+            this.repositoryDir = repositoryDir;
+            ReportRepositoryIoUtil.cleanDirectory(repositoryDir.toFile());
+            Files.createFile(repositoryDir.resolve(EARN_LESS));
+            Files.createFile(repositoryDir.resolve(EARN_MORE));
+            Files.createFile(repositoryDir.resolve(LONG_LINE));
+        } catch (final IOException e) {
+            throw new ApplicationException("Report repository create error.", e);
+        }
     }
 
     public void addEmployee(final CsvLineDto csvLineDto) {
@@ -50,7 +53,7 @@ public class ReportRepository implements AutoCloseable {
         saveManager(managerPath, csvLineDto, originalManager);
     }
 
-    public ReportLineReader getEarnLessReader() throws FileNotFoundException {
+    public ReportLineReader getEarnLessReader() {
         return new ReportLineReader(repositoryDir, EARN_LESS, reportDataDto -> new ReportLineDto(
                 reportDataDto.lineDto().firstName(),
                 reportDataDto.lineDto().lastName(),
@@ -58,7 +61,7 @@ public class ReportRepository implements AutoCloseable {
         ));
     }
 
-    public ReportLineReader getEarnMoreReader() throws FileNotFoundException {
+    public ReportLineReader getEarnMoreReader() {
         return new ReportLineReader(repositoryDir, EARN_MORE, reportDataDto -> new ReportLineDto(
                 reportDataDto.lineDto().firstName(),
                 reportDataDto.lineDto().lastName(),
@@ -66,7 +69,7 @@ public class ReportRepository implements AutoCloseable {
         ));
     }
 
-    public ReportLineReader getTooLongLineReader() throws FileNotFoundException {
+    public ReportLineReader getTooLongLineReader() {
         return new ReportLineReader(repositoryDir, LONG_LINE, reportDataDto -> new ReportLineDto(
                 reportDataDto.lineDto().firstName(),
                 reportDataDto.lineDto().lastName(),

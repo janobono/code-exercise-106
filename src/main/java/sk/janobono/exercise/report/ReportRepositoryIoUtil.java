@@ -1,5 +1,7 @@
 package sk.janobono.exercise.report;
 
+import sk.janobono.ApplicationException;
+
 import java.io.*;
 import java.nio.file.Path;
 
@@ -27,7 +29,7 @@ public class ReportRepositoryIoUtil {
         try (final ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path.toFile()))) {
             return (T) ois.readObject();
         } catch (final IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new ApplicationException("Data read error.", e);
         }
     }
 
@@ -36,7 +38,7 @@ public class ReportRepositoryIoUtil {
             oos.writeObject(data);
             oos.flush();
         } catch (final IOException e) {
-            throw new RuntimeException(e);
+            throw new ApplicationException("Data write error.", e);
         }
     }
 
@@ -45,7 +47,7 @@ public class ReportRepositoryIoUtil {
             writer.println(id);
             writer.flush();
         } catch (final IOException e) {
-            throw new RuntimeException(e);
+            throw new ApplicationException("Line write error.", e);
         }
     }
 }

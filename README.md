@@ -52,4 +52,8 @@ java -jar ./target/code-exercise-106.jar [arg1] [arg2]
 
 - `Number of rows can be up to 1000.` - wrong decision here I was thinking that it could be more. Partial result data
   are serialized so the next reading is just summary.
-  - Flag removed - fixed.
+    - Flag removed - fixed.
+
+- I didn't wrap the system error in application errors. I wanted to use `ApplicationException` just for user-relevant
+  cases.
+    - Fixed.
