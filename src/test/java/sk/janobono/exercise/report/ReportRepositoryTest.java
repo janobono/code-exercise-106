@@ -56,7 +56,7 @@ class ReportRepositoryTest {
         final List<ReportLineDto> earnLess;
         final List<ReportLineDto> earnMore;
         final List<ReportLineDto> tooLongLine;
-        try (final ReportRepository reportRepository = new ReportRepository(dir, false)) {
+        try (final ReportRepository reportRepository = new ReportRepository(dir)) {
             for (final CsvLineDto csvLineDto : dataSet) {
                 reportRepository.addEmployee(csvLineDto);
             }

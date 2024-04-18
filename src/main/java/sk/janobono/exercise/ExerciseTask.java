@@ -16,7 +16,7 @@ public class ExerciseTask {
     public void execute(final Path inputDataPath, final boolean skipHeader) {
         try (
                 final CsvLineReader lineReader = new CsvLineReader(inputDataPath, skipHeader);
-                final ReportRepository reportRepository = new ReportRepository(Files.createTempDirectory("Exercise106"), true);
+                final ReportRepository reportRepository = new ReportRepository(Files.createTempDirectory("Exercise106"));
         ) {
             Optional<CsvLineDto> line;
 

@@ -46,4 +46,10 @@ java -jar ./target/code-exercise-106.jar [arg1] [arg2]
 - ReportRepositoryMathUtilTest has a lot similar asserts, with different parameters, so test class could be improved by
   using @ParametrizedTest
 - Documentation issues:
-    - No documentation comments for classes and for methods 
+    - No documentation comments for classes and for methods
+
+## comments after review
+
+- `Number of rows can be up to 1000.` - wrong decision here I was thinking that it could be more. Partial result data
+  are serialized so the next reading is just summary.
+  - Flag removed - fixed.

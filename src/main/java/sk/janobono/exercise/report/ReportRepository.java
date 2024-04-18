@@ -19,11 +19,9 @@ public class ReportRepository implements AutoCloseable {
     private static final String LONG_LINE = "long_line.txt";
 
     private final Path repositoryDir;
-    private final boolean deleteOnClose;
 
-    public ReportRepository(final Path repositoryDir, final boolean deleteOnClose) throws IOException {
+    public ReportRepository(final Path repositoryDir) throws IOException {
         this.repositoryDir = repositoryDir;
-        this.deleteOnClose = deleteOnClose;
         ReportRepositoryIoUtil.cleanDirectory(repositoryDir.toFile());
         Files.createFile(repositoryDir.resolve(EARN_LESS));
         Files.createFile(repositoryDir.resolve(EARN_MORE));
@@ -78,7 +76,7 @@ public class ReportRepository implements AutoCloseable {
 
     @Override
     public void close() {
-        if (repositoryDir != null && Files.exists(repositoryDir) && deleteOnClose) {
+        if (repositoryDir != null && Files.exists(repositoryDir)) {
             ReportRepositoryIoUtil.deleteDirectory(repositoryDir.toFile());
         }
     }
