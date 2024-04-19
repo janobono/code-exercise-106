@@ -80,7 +80,6 @@ java -jar ./target/code-exercise-106.jar [arg1] [arg2]
 
 - ReportLineReaderTest - redundant variable removed - fixed.
 
-- ReportRepositoryMathUtilTest - `use only Java SE (any version), and Junit (any version) for tests.` I wasn't sure if I
-  can use the next dependency.
+- ReportRepositoryMathUtilTest - wrong dependency fixed and then test fixed too
 
 - Documentation issues - simple util self documented code.
